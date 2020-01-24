@@ -35,8 +35,10 @@ public class SwiftScreenshotCallbackPlugin: NSObject, FlutterPlugin {
       }
       result("initialize")
     }else if(call.method == "dispose"){
-        NotificationCenter.default.removeObserver(SwiftScreenshotCallbackPlugin.observer!);
-        SwiftScreenshotCallbackPlugin.observer = nil;
+        if(SwiftScreenshotCallbackPlugin.observer != nil) {
+            NotificationCenter.default.removeObserver(SwiftScreenshotCallbackPlugin.observer!);
+            SwiftScreenshotCallbackPlugin.observer = nil;
+        }
         result("dispose")
     }else{
       result("")
@@ -44,7 +46,9 @@ public class SwiftScreenshotCallbackPlugin: NSObject, FlutterPlugin {
   }
     
     deinit {
-        NotificationCenter.default.removeObserver(SwiftScreenshotCallbackPlugin.observer!);
-        SwiftScreenshotCallbackPlugin.observer = nil;
+        if(SwiftScreenshotCallbackPlugin.observer != nil) {
+            NotificationCenter.default.removeObserver(SwiftScreenshotCallbackPlugin.observer!);
+            SwiftScreenshotCallbackPlugin.observer = nil;
+        }
     }
 }
